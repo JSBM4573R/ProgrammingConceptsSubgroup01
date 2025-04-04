@@ -1,0 +1,5 @@
+001;Esfero;2500
+002;Lápiz;1950
+003;Borrador;850
+004;Tajalápiz;1200
+005;Escuadra;5800
