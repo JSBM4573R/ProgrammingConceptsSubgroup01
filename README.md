@@ -12,6 +12,6 @@ Este proyecto tiene como objetivo aplicar los conceptos fundamentales de program
 
 Se desarrollaron dos clases principales con métodos `main`:
 
-- `GenerateInfoFiles`: genera archivos de prueba con datos pseudoaleatorios (vendedores, productos y ventas).
-- `Main`: procesa estos archivos para generar reportes en formato `.csv` ordenados según criterios específicos.
+- `GenerateInfoFiles`: genera archivos de prueba con datos pseudoaleatorios (vendedores, productos y ventas) en la ruta de la raiz del proyecto: files/input/**
+- `Main`: procesa estos archivos para generar reportes en formato `.csv` ordenados según criterios específicos y con los test correspondientes en la ruta de la raiz del proyecto: files/output/**
 
