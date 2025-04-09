@@ -1,10 +1,10 @@
  # Proyecto Subgrupo 01 - Evolutivo Entregable 2 - Fundamentos de Programación en Java Politecnico Grancolombiano
 
 ##  Integrantes
-Juan Sebastián Bustos Marroquín 
-Didier Rafael Tabares Giraldo 
-Claudia Jineth Aguirre Botero 
-Miche Sánchez Daza 
+- Juan Sebastián Bustos Marroquín 
+- Didier Rafael Tabares Giraldo 
+- Claudia Jineth Aguirre Botero 
+- Miche Sánchez Daza 
 
 ##  Descripción General
 
