@@ -3,8 +3,19 @@ package reports;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Clase que contiene los metodos necesarios para poder generar los archivos
+ * planos pseudoaleatorios que servirán como entrada para la ejecución de la
+ * segunda clase con método main. El programa muestra un mensaje de finalización
+ * exitosa o un mensaje de error, en caso de que algo salga mal.
+ */
 public class GenerateInfoFiles {
 
+	/**
+	 * Metodo Main o ejecutable de la logica del codigo
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		String pathGenerateFileProducts = "files/input/products/InfoProductosDisponibles.csv";
@@ -32,6 +43,13 @@ public class GenerateInfoFiles {
 
 	}
 
+	/**
+	 * Metodo que genera escribe y crea un archivo plano en una ruta indicada bajo
+	 * la información que se le suministra
+	 * 
+	 * @param filePath Ruta a escribir
+	 * @param dataList Información para generar los archivos
+	 */
 	public static void writeFiles(String filePath, List<String> dataList) {
 		// Usamos la clase BufferedWriter escribir un archivo
 		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
@@ -53,6 +71,11 @@ public class GenerateInfoFiles {
 		}
 	}
 
+	/**
+	 * Metodo que genera una lista de productos
+	 * 
+	 * @return
+	 */
 	public static List<String> infoProducts() {
 		List<String> listProducts = new ArrayList<String>();
 
@@ -70,6 +93,11 @@ public class GenerateInfoFiles {
 		return listProducts;
 	}
 
+	/**
+	 * Metodo que genera una lista de ventas de un vendedor
+	 * 
+	 * @return
+	 */
 	public static List<String> infoSaleCamila() {
 		List<String> listSales = new ArrayList<String>();
 
@@ -85,6 +113,11 @@ public class GenerateInfoFiles {
 		return listSales;
 	}
 
+	/**
+	 * Metodo que genera una lista de ventas de un vendedor
+	 * 
+	 * @return
+	 */
 	public static List<String> infoSaleSantiago() {
 		List<String> listSales = new ArrayList<String>();
 
@@ -100,6 +133,11 @@ public class GenerateInfoFiles {
 		return listSales;
 	}
 
+	/**
+	 * Metodo que genera una lista de ventas de un vendedor
+	 * 
+	 * @return
+	 */
 	public static List<String> infoSaleMateo() {
 		List<String> listSales = new ArrayList<String>();
 
@@ -115,6 +153,11 @@ public class GenerateInfoFiles {
 		return listSales;
 	}
 
+	/**
+	 * Metodo que genera una lista de informacion de vendedores
+	 * 
+	 * @return
+	 */
 	public static List<String> infoSellers() {
 		List<String> listSellers = new ArrayList<String>();
 
