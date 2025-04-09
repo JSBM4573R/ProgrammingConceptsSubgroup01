@@ -3,12 +3,47 @@ package reports;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Esta clase Main genera la creación de un archivo con la información de todos
+ * los vendedores, de a uno por línea. Al frente del nombre de cada vendedor,
+ * separado por punto y coma, debe estar la cantidad de dinero que recaudó según
+ * los archivos. El archivo debe estar ordenado por cantidad de dinero, de mayor
+ * a menor, de a un vendedor por línea. Es básicamente un archivo de reporte de
+ * ventas de los vendedores, del mejor al peor; un archivo CSV.
+ * 
+ * Adicionalmente crea un archivo con la información de los productos vendidos
+ * por cantidad, ordenados en forma descendente. Deben ir el nombre y el precio,
+ * separados por punto y coma, y de a un producto por línea. Es básicamente un
+ * archivo plano CSV
+ * 
+ * De igual forma contiene los metodos para la genración de los test
+ * correspondientes que permiten validar el funcionamiento del programa.
+ * 
+ * El programa muestra un mensaje de finalización exitosa o un mensaje de error,
+ * en caso de que algo salga mal.
+ */
 public class Main {
 
+	/**
+	 * Lista de productos obtenida del archivo escrito
+	 */
 	public static List<Product> products = new ArrayList<Product>();
+
+	/**
+	 * Lista de vendedores obtenida del archivo escrito
+	 */
 	public static List<Seller> sellers = new ArrayList<Seller>();
+
+	/**
+	 * Lista de ventas obtenidas de los archivos escritos
+	 */
 	public static List<Sale> sales = new ArrayList<Sale>();
 
+	/**
+	 * Metodo Main o ejecutable de la logica del codigo
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		// Ruta del archivo con la información de los vendedores
@@ -37,18 +72,23 @@ public class Main {
 
 		System.out.println(
 				"¡Finalización Exitosa de la clase Main! Se generaron todos los reportes en la ruta: files/output/*");
-		
-		System.out.println(
-				"¡No olvides de darle un Refresh a la carpeta raiz para visualizarlos!");
+
+		System.out.println("¡No olvides de darle un Refresh a la carpeta raiz para visualizarlos!");
 
 	}
 
+	/**
+	 * Metodo que permite leer linea por linea los archivos planos
+	 * 
+	 * @param nameFile
+	 */
 	public static void readFile(File nameFile) {
 
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(nameFile));
 			String line;
 
+			// Creamos una secuencia para poder settear un id al objeto
 			int sequence = 1;
 			int idSeller = 0;
 
@@ -85,6 +125,14 @@ public class Main {
 		}
 	}
 
+	/**
+	 * Metodo que crea un archivo con la información de todos los vendedores, de a
+	 * uno por línea. Al frente del nombre de cada vendedor, separado por punto y
+	 * coma, debe estar la cantidad de dinero que recaudó según los archivos. El
+	 * archivo debe estar ordenado por cantidad de dinero, de mayor a menor, de a un
+	 * vendedor por línea. Es básicamente un archivo de reporte de ventas de los
+	 * vendedores, del mejor al peor; un archivo CSV.
+	 */
 	public static void generateSalesReport() {
 		Seller seller = null;
 		String pathGenerateFileSalesReport = "files/output/reporteTotalVentas.csv";
@@ -130,6 +178,12 @@ public class Main {
 		GenerateInfoFiles.writeFiles(pathGenerateFileSalesReport, lineas);
 	}
 
+	/**
+	 * Metodo que crea un archivo con la información de los productos vendidos por
+	 * cantidad, ordenados en forma descendente. Deben ir el nombre y el precio,
+	 * separados por punto y coma, y de a un producto por línea. Es básicamente un
+	 * archivo plano CSV.
+	 */
 	public static void generateSalesProductsReport() {
 		Map<Integer, Integer> saleAmountProducts = new HashMap<Integer, Integer>();
 		Map<String, Integer> salesPerAmountProduct = new HashMap<>();
@@ -176,6 +230,12 @@ public class Main {
 		GenerateInfoFiles.writeFiles(pathGenerateFileSalesProductReport, lines);
 	}
 
+	/**
+	 * Metodo que valida si los archivos suministrados existen en el folderPath
+	 * indicado Si existen llamara el metodo readFile()
+	 * 
+	 * @param folderPath
+	 */
 	public static void processFilesInFolder(String folderPath) {
 		File folder = new File(folderPath);
 
@@ -203,6 +263,14 @@ public class Main {
 
 	}
 
+	/**
+	 * Metodo que permite generar una busqueda de un vendedor por su numero de
+	 * documento de identificación
+	 * 
+	 * @param listSeller
+	 * @param documentNumber
+	 * @return
+	 */
 	public static Seller findSellerByDocumentNumber(List<Seller> listSeller, String documentNumber) {
 		for (Seller item : listSeller) {
 			if (item.getDocumentNumber().equals(documentNumber)) {
@@ -212,6 +280,13 @@ public class Main {
 		return null;
 	}
 
+	/**
+	 * Metodo que permite generar una busqueda de un producto por su id
+	 * 
+	 * @param listProduct
+	 * @param id
+	 * @return
+	 */
 	public static Product findProductById(List<Product> listProduct, int id) {
 		for (Product item : listProduct) {
 			if (item.getId().equals(id)) {
@@ -221,6 +296,13 @@ public class Main {
 		return null;
 	}
 
+	/**
+	 * Metodo que permite generar una busqueda de un vendedor por su id
+	 * 
+	 * @param listSeller
+	 * @param id
+	 * @return
+	 */
 	public static Seller findSellerById(List<Seller> listSeller, int id) {
 		for (Seller item : listSeller) {
 			if (item.getId().equals(id)) {
@@ -230,6 +312,13 @@ public class Main {
 		return null;
 	}
 
+	/**
+	 * Metodo que mapea los productos disponibles obtenidos de la lectura del
+	 * archivo
+	 * 
+	 * @param parts
+	 * @return
+	 */
 	public static Product mapperAvailableProducts(String[] parts) {
 		Product product = new Product();
 
@@ -240,6 +329,14 @@ public class Main {
 		return product;
 	}
 
+	/**
+	 * Metodo que mapea las ventas obtenidas de la lectura de los archivos
+	 * 
+	 * @param parts
+	 * @param idSale
+	 * @param idSeller
+	 * @return
+	 */
 	public static Sale mapperSales(String[] parts, int idSale, int idSeller) {
 		Sale sale = new Sale();
 
@@ -253,6 +350,14 @@ public class Main {
 		return sale;
 	}
 
+	/**
+	 * Metodo que mapea la informacion de los vendedores obtenida de la lectura del
+	 * archivo
+	 * 
+	 * @param parts
+	 * @param id
+	 * @return
+	 */
 	public static Seller mapperSellers(String[] parts, int id) {
 		Seller seller = new Seller();
 
@@ -271,9 +376,9 @@ public class Main {
 	 */
 	public static void testFiles() {
 		Random random = new Random();
-		createSalesMenFile(random.nextInt(3)+1, "Andres", Long.valueOf(1));
+		createSalesMenFile(random.nextInt(3) + 1, "Andres", Long.valueOf(1));
 		createProductsFile(products.size());
-		createSalesManInfoFile(random.nextInt(3)+1);
+		createSalesManInfoFile(random.nextInt(3) + 1);
 	}
 
 	/**
@@ -329,14 +434,17 @@ public class Main {
 		List<String> listSales = new ArrayList<String>();
 		Random random = new Random();
 		for (int i = 0; i < salesmanCount; i++) {
-			listSales.add("CC" + 101914510 + random.nextInt(9)+1 + ";" + sellers.get(random.nextInt(2)+1).getName() + ";"
-					+ sellers.get(random.nextInt(2)+1).getLastName());
+			listSales.add("CC" + 101914510 + random.nextInt(9) + 1 + ";" + sellers.get(random.nextInt(2) + 1).getName()
+					+ ";" + sellers.get(random.nextInt(2) + 1).getLastName());
 		}
 
 		GenerateInfoFiles.writeFiles(testPathCreateSalesManInfoFile, listSales);
 	}
 }
 
+/**
+ * Clase que contiene los atributos y metodos para el objeto Vendedor
+ */
 class Seller {
 
 	private Integer id;
@@ -393,6 +501,9 @@ class Seller {
 
 }
 
+/**
+ * Clase que contiene los atributos y metodos para el objeto Producto
+ */
 class Product {
 
 	private Integer id;
@@ -430,6 +541,9 @@ class Product {
 
 }
 
+/**
+ * Clase que contiene los atributos y metodos para el objeto Venta
+ */
 class Sale {
 
 	private Integer id;
