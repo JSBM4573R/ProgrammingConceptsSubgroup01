@@ -80,49 +80,67 @@ public class Main {
 	/**
 	 * Metodo que permite leer linea por linea los archivos planos
 	 * 
+	 * EXTRA DEL PROYECTO: posibilidad de procesar más de un archivo por vendedor.
+	 * dentro de éste método se realiza la modificación para que el sistema 
+	 * pueda leer multiples archivos de ventas que pertenecen a un solo vendedor, el reporte
+	 * total de ventas suma todos las ventas de los diferentes archivos asociados a un vendedor
+	 * 
 	 * @param nameFile
 	 */
 	public static void readFile(File nameFile) {
 
-		try {
-			BufferedReader bufferedReader = new BufferedReader(new FileReader(nameFile));
-			String line;
+	    try {
+	        BufferedReader bufferedReader = new BufferedReader(new FileReader(nameFile));
+	        String line;
 
-			// Creamos una secuencia para poder settear un id al objeto
-			int sequence = 1;
-			int idSeller = 0;
+	        // Creamos una secuencia para poder settear un id al objeto
+	        int sequence = 1;
+	        int idSeller = 0;
+	        //Ésta variable lee la primera línea con la información del vendedor de cada archivo de ventas  
+	        boolean isFirstLine = true;
 
-			// Leer línea por línea
-			while ((line = bufferedReader.readLine()) != null) {
+	        // Leer línea por línea
+	        while ((line = bufferedReader.readLine()) != null) {
 
-				// Separamos por ";"
-				String[] partes = line.split(";");
+	            // Separamos por ";"
+	            String[] partes = line.split(";");
 
-				if (nameFile.toString().contains("sellers")) { // Filtramos por el archivo de vendedores
-					sellers.add(mapperSellers(partes, sequence));
-					++sequence;
-				} else if (nameFile.toString().contains("products")) { // Filtramos por el archivo de productos
-					products.add(mapperAvailableProducts(partes));
-				} else if (nameFile.toString().contains("sales")) { // Filtramos por el archivo de ventas
-					if (partes[0].contains("CC")) { // Identificamos el vendedor que esta en la primera linea
-						Seller seller = findSellerByDocumentNumber(sellers, partes[1]);
-						idSeller = seller.getId();
-					} else {
-						sales.add(mapperSales(partes, sequence, idSeller));
-						++sequence;
-					}
-				}
-			}
+	            // Filtramos por el archivo de vendedores
+	            if (nameFile.toString().contains("sellers")) { 
+	                sellers.add(mapperSellers(partes, sequence));
+	                ++sequence;
+	            // Filtramos por el archivo de productos
+	            } else if (nameFile.toString().contains("products")) { 
+	                products.add(mapperAvailableProducts(partes));
+	            // Filtramos por el archivo de ventas
+	            } else if (nameFile.toString().contains("sales")) { 
+	            	// Identificamos el vendedor que esta en la primera linea
+	            	if (isFirstLine && partes[0].contains("CC")) { 
+	                    Seller seller = findSellerByDocumentNumber(sellers, partes[1]);
+	                    // si el vendedor existe se guarda el ID en la variable idSeller
+	                    if (seller != null) {
+	                        idSeller = seller.getId();
+	                    } else {
+	                        System.out.println("No se encontró vendedor con documento: " + partes[1] + " en el archivo: " + nameFile.getName());
+	                    }
+	                    //se marca como false para indicar que ya se proceso la primera linea del archivo
+	                    isFirstLine = false;
+	                } else {
+	                    // Solo procesamos líneas de venta si hemos identificado un vendedor
+	                    if (idSeller > 0) {
+	                        sales.add(mapperSales(partes, sequence, idSeller));
+	                        ++sequence;
+	                    }
+	                }
+	            }
+	        }
 
-			// Reiniciamos la secuencia
-			sequence = 1;
+	        // Limpiamos el buffered en memoria
+	        bufferedReader.close();
 
-			// Limpiamos el buffered en memoria
-			bufferedReader.close();
-
-		} catch (IOException e) {
-			System.out.println("Error al leer el archivo: " + e.getMessage());
-		}
+	    } catch (IOException e) {
+	        System.out.println("Error al leer el archivo: " + e.getMessage());
+	    }
 	}
 
 	/**
@@ -237,30 +255,34 @@ public class Main {
 	 * @param folderPath
 	 */
 	public static void processFilesInFolder(String folderPath) {
-		File folder = new File(folderPath);
+	    File folder = new File(folderPath);
 
-		// Verificar si la carpeta existe y es un directorio
-		if (!folder.exists() || !folder.isDirectory()) {
-			System.out.println(
-					"El folder no existe o no es un directorio valido. Por favor, verifica he intenta nuevamente.");
-			return;
-		}
+	    // Verificar si la carpeta existe y es un directorio
+	    if (!folder.exists() || !folder.isDirectory()) {
+	        System.out.println(
+	                "El folder no existe o no es un directorio valido. Por favor, verifica e intenta nuevamente.");
+	        return;
+	    }
 
-		// Obtener la lista de archivos dentro de la carpeta
-		File[] files = folder.listFiles();
+	    // Obtener la lista de archivos dentro de la carpeta
+	    File[] files = folder.listFiles();
 
-		if (files == null || files.length == 0) {
-			System.out.println("La carpeta esta vacia. Por favor, agrega los archivos he intenta nuevamente.");
-			return;
-		}
+	    if (files == null || files.length == 0) {
+	        System.out.println("La carpeta esta vacia. Por favor, agrega los archivos he intenta nuevamente.");
+	        return;
+	    }
 
-		// Iterar sobre cada archivo en la carpeta y leerlo
-		for (File file : files) {
-			if (file.isFile()) {
-				readFile(file);
-			}
-		}
-
+	    // Iterar sobre cada archivo en la carpeta y leerlo
+	    for (File file : files) {
+	        if (file.isFile()) {
+	            if (folderPath.contains("sales")) {
+	                // reiniciamos la secuencia para cada archivo de ventas
+	                readFile(file);
+	            } else {
+	                readFile(file);
+	            }
+	        }
+	    }
 	}
 
 	/**

@@ -37,6 +37,10 @@ public class GenerateInfoFiles {
 		String pathGenerateFileSalesMateo = "files/input/sales/VentasMateo.csv";
 		// Creamos un archivo plano con las ventas de Mateo
 		writeFiles(pathGenerateFileSalesMateo, infoSaleMateo());
+		
+		String pathGenerateFileSalesMateo_Abril = "files/input/sales/VentasMateo_Abril.csv";
+		// Creamos un archivo plano con las ventas de Mateo para mes de abril
+		writeFiles(pathGenerateFileSalesMateo_Abril, infoSaleMateo_Abril());
 
 		System.out.println(
 				"¡Finalización Exitosa de la clase GenerateInfoFiles! Se generaron todos los archivos planos en la ruta: files/input/*");
@@ -148,6 +152,26 @@ public class GenerateInfoFiles {
 		String sale2 = "3;7";
 		listSales.add(sale2);
 		String sale3 = "2;4";
+		listSales.add(sale3);
+
+		return listSales;
+	}
+	
+	/**
+	 * Metodo que genera una lista de ventas del vendedor Mateo para el mes de abril
+	 * 
+	 * @return
+	 */
+	public static List<String> infoSaleMateo_Abril() {
+		List<String> listSales = new ArrayList<String>();
+
+		String encabezado = "CC;1018456735";
+		listSales.add(encabezado);
+		String sale1 = "1;10";
+		listSales.add(sale1);
+		String sale2 = "4;3";
+		listSales.add(sale2);
+		String sale3 = "5;6";
 		listSales.add(sale3);
 
 		return listSales;
