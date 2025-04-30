@@ -1,0 +1,23 @@
+CONCLUSIONES
+
+1- Lo aprendido durante el desarrollo del proyecto
+
+Durante el desarrollo de este proyecto se fortalecieron habilidades clave en la programación orientada a objetos con Java, así como en la organización y estructuración de proyectos en el entorno de desarrollo Eclipse. Uno de los principales aprendizajes fue la implementación de un sistema que procesa grandes volúmenes de datos distribuidos en múltiples archivos, aplicando buenas prácticas de codificación y documentación.
+Se adquirió experiencia en la lectura y escritura de archivos de texto plano, en la generación de datos pseudoaleatorios para pruebas, y en la separación lógica de funcionalidades dentro de distintas clases.
+Otro aprendizaje importante fue la capacidad para diseñar métodos que no dependan de la interacción directa con el usuario, permitiendo una ejecución autónoma del programa desde archivos de entrada, lo cual se alinea con las especificaciones del proyecto.
+Una parte importante de todo el proceso fue el trabajo en equipo por medio de repositorio ya que a nivel laboral es de vital importancia tener claro que en la mayoría de los casos se trabajan proyectos con participaciones activas en repositorios ya existentes.
+En general, el proyecto permitió aplicar conocimientos teóricos en un contexto práctico y orientado a la solución de un problema realista, lo que contribuyó significativamente al desarrollo de competencias técnicas y analíticas brindando experiencia para futuros empleos relacionados con el análisis de datos. 
+
+2- Posibles aplicaciones en su vida profesional de las destrezas y conocimientos adquiridos y practicados durante el desarrollo del proyecto.
+
+Las destrezas y conocimientos adquiridos durante el desarrollo de este proyecto tienen un alto valor práctico en la vida profesional, especialmente en áreas relacionadas con el desarrollo de software, análisis de datos y automatización de procesos. La capacidad para diseñar programas que procesan información desde archivos, organizan grandes volúmenes de datos y generan reportes útiles es fundamental en entornos corporativos donde se requiere eficiencia y precisión en la gestión de datos.
+El manejo adecuado de estructuras de datos, la modularización del código, la escritura clara y documentada, así como el uso de herramientas profesionales como Eclipse, son habilidades que se transfieren directamente a proyectos empresariales ya sea para el desarrollo de aplicaciones internas, herramientas de análisis o sistemas de información. Asimismo, la práctica con archivos de entrada y salida, junto con la validación y control de errores, permite desarrollar soluciones más robustas y adaptables, algo esencial en la industria del software.
+En conjunto, este proyecto ha contribuido a fortalecer competencias técnicas y lógicas que serán de gran utilidad en cualquier escenario profesional relacionado con el desarrollo y mantenimiento de sistemas informáticos.
+
+3- Las dificultades presentadas durante el desarrollo del proyecto.
+
+Durante el desarrollo del proyecto se presentaron diversas dificultades tanto técnicas como conceptuales. Una de las principales fue la correcta interpretación de los requerimientos, especialmente al identificar la forma en que debían ser organizados y procesados los archivos de entrada, así como las estructuras necesarias para representar la información de productos, vendedores y ventas.
+Otro reto importante fue implementar la lectura y escritura de archivos en Java de manera eficiente y sin errores, asegurando que los datos generados aleatoriamente fueran coherentes y funcionales para las pruebas posteriores.
+También fue desafiante garantizar que el programa funcionara de forma automática, sin interacción con el usuario y que los resultados cumplieran con los formatos de salida esperados, especialmente en lo relacionado con el ordenamiento de los reportes por criterios específicos como la cantidad recaudada o la cantidad de productos vendidos.
+Estas dificultades fueron superadas mediante la práctica, la consulta de documentación oficial, y la depuración constante del código, lo que permitió obtener una solución funcional y alineada con los objetivos del proyecto.
+
